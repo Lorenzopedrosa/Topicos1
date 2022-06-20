@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+
+			<h:messages errorStyle="color:red" warnStyle="color:orange"
+				infoStyle="color:green" globalOnly="false" />
+
+			<!-- Container -->
+			<div class="container-fluid">
+				<div class="row justify-content-md-center">
+					<div class="col-md-10 col-md-auto login-box">
+						<h:messages styleClass="alert alert-danger hmessages" />
+						<div class="form-row">
+							<div class="form-group col-md-5">
+								<h1>Consulta</h1>
+							</div>
+							<div class="form-group col-md-1">
+								<h:commandButton value="+ Usuarios" class="btn btn-success"
+									action="#{usuarioController.novo}" />
+							</div>
+						</div>
+
+						<hr />
+
+						<h:dataTable id="dataTable"
+							value="#{usuarioController.listaUsuario}" var="obj">
+
+							<h:column>
+								<f:facet name="header"> Nome </f:facet>
+								<h:outputLabel value="#{obj.nome}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header"> Login </f:facet>
+								<h:outputLabel value="#{obj.login}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header"> Senha </f:facet>
+								<h:outputLabel value="******" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header"> Nascimento </f:facet>
+								<h:outputLabel value="#{obj.dataNascimento}">
+									<f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
+								</h:outputLabel>
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Perfil</f:facet>
+								<h:outputLabel value="#{obj.perfil.label}" />
+							</h:column>
+
+
+							<h:column>
+								<f:facet name="header">Ação</f:facet>
+								<h:commandButton value="Editar" class="btn btn-primary"
+									action="#{usuarioController.editar(obj.id)}">
+									<f:ajax execute="@this" render="@form" />
+								</h:commandButton>
+							</h:column>
+							<h:column>
+								<h:commandButton value="Excluir" class="btn btn-primary"
+									action="#{usuarioController.excluir(obj.id)}">
+									<f:ajax execute="@this" render="@form" />
+								</h:commandButton>
+							</h:column>
+
+						</h:dataTable>
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

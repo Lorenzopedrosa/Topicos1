@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="template.css"/>  
+	<h:outputStylesheet library="css" name="table.css"/>
+</h:head>
+
+<h:body>
+	 <div class="wrapper">
+	 	<div class="box navbar header">
+			<h1 style="width: 100%;" > Farmácia Bom Preço</h1>
+			<div style="width: 100%; text-align: right;" >
+				<h:form rendered="#{templateController.usuarioLogado != null}" > 
+					<h:outputLabel value="Olá #{templateController.usuarioLogado.nome}"/>
+					<h:commandLink value=" (Sair)"   
+						action="#{templateController.encerrarSessao}"
+						style="color:white"/>
+				</h:form>
+			</div>
+	 	</div>	 	
+		<div class="box sidebar" style="text-align: center;">
+			<ui:insert name="menu">
+				<h2></h2>		
+
+				<h:form>
+					<h:commandLink value="Login" action="/login2.xhtml?faces-redirect=true"/> <br/>
+					<h:commandLink value="Cadastro Usuario" action="/usuario.xhtml?faces-redirect=true"/> <br/>
+					<h:commandLink value="Consulta Usuario" action="/usuario2.xhtml?faces-redirect=true"/> <br/>
+					<h:commandLink value="Compras Realizadas" action="/historico.xhtml?faces-redirect=true"/>  <br/>
+					<h:commandLink value="Remedios" action="/farmacia1.xhtml?faces-redirect=true"/> <br/>
+					<h:commandLink value="Vendas" action="/venda.xhtml?faces-redirect=true"/> <br/>
+					<h:commandLink value="Carrinho" action="/carrinho.xhtml?faces-redirect=true"/>  <br/>
+				</h:form>
+			</ui:insert>
+		</div>
+		<div class="box content">
+			<br/>
+			<div align="center">
+				<ui:insert name="conteudo">
+				</ui:insert>
+			</div>
+		</div>
+		<div class="box footer" style="text-align: center;">
+			<h:outputText value="Direitos Reservados Pelo SUS - 2022" />
+		</div>
+	</div>
+</h:body>
+</html>
